@@ -13,6 +13,7 @@ Date: 23/08/2020
     Changed the style of the documentation
 """
 from classes import space
+import random
 
 
 class Board:
@@ -24,7 +25,7 @@ class Board:
         :param length: (int) length of the board, also the height
         """
         self.length = length
-        self.spaces = space[length][length]
+        self.spaces = [[space.Space() for i in range(length)] for j in range(length)]
 
     def print_board(self):
         """ Method to print the board
@@ -38,6 +39,9 @@ class Board:
             while n < self.length:
                 # Printing every space
                 print(" ", self.spaces[i][n].content, end=" ")
+                n += 1
+            print("")
+            i += 1
 
     def did_computer_won(self):
         """ Method to check if the computer won
@@ -127,3 +131,71 @@ class Board:
             i += 1
             n += 1
         return True
+
+    def user_input(self, row, column):
+        """ Method to introduce the user input
+
+        :param column: Column which the user chose
+        :param row: Row which the user chose
+        :return: Boolean
+            True if it is possible to occupy this place
+            False if not
+        """
+        if self.check_entire_board():
+            self.reset_board()
+
+        if self.spaces[row][column].content == '*':
+            self.spaces[row][column].user_occupies()
+            return True
+        else:
+            print("Space occupied")
+            return False
+
+    def computer_input(self):
+        """ Method to introduce a random computer input
+
+        :return: void
+        """
+        if self.check_entire_board():
+            self.reset_board()
+        row = 0
+        column = 0
+        while True:
+            row = random.randrange(0, self.length)
+            column = random.randrange(0, self.length)
+            if self.spaces[row][column].content == '*':
+                self.spaces[row][column].computer_occupies()
+                break
+
+    def check_entire_board(self):
+        """ Method to check if the entire field is occupied
+
+        :return: Boolean value
+            True if the entire field is occupied,
+            False if not
+        """
+        i = 0
+        while i < self.length:
+            n = 0
+            while n < self.length:
+                if self.spaces[i][n].content == '*':
+                    return False
+                n += 1
+            i += 1
+        return True
+
+    def reset_board(self):
+        """ Method to reset the entire board
+
+        :return: void
+        """
+        self.print_board()
+        print("\n Full board, reseting it")
+
+        i = 0
+        while i < self.length:
+            n = 0
+            while n < self.length:
+                self.spaces[i][n].reset_space()
+                n += 1
+            i += 1

@@ -8,6 +8,7 @@ Date: 23/08/2020
     Modified the attributes of the class, I removed the boolean attribute
     occupied, there's no need to use it.
     Also changed the style of the documentation
+    Added method reset_space
 """
 
 
@@ -31,3 +32,10 @@ class Space:
         :return: void
         """
         self.content = '0'
+
+    def reset_space(self):
+        """ Method to reset the space
+
+        :return: void
+        """
+        self.content = '*'
