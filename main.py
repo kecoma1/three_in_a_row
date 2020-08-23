@@ -94,8 +94,8 @@ while True:
 
     # Checking if the user won
     if game_board.did_user_won():
-        print("CONGRATULATIONS, YOU WON!")
         game_board.print_board()
+        print("CONGRATULATIONS, YOU WON!")
         break
     elif game_board.did_computer_won():
         game_board.print_board()
