@@ -97,6 +97,8 @@ while True:
         game_board.print_board()
         print("CONGRATULATIONS, YOU WON!")
         break
+
+    # Checking if the computer won
     elif game_board.did_computer_won():
         game_board.print_board()
         print("YOU LOST")

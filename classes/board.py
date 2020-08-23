@@ -131,13 +131,43 @@ class Board:
             True if the diagonal has just that char,
             False if not
         """
+        if self.check_first_diagonal(player) or self.check_second_diagonal(player):
+            return True
+
+    def check_first_diagonal(self, player):
+        """ Method to check first diagonal \
+
+        :param player: Player to check
+        :return: Boolean value
+            True if the first diagonal is full
+            False if not
+        """
         i = 0
         n = 0
+        # Checking the first diagonal \
         while i < self.length:
             if self.spaces[i][n].content != player:
                 return False
             i += 1
             n += 1
+        return True
+
+    def check_second_diagonal(self, player):
+        """ Method to check the second diagonal /
+
+        :param player: Player to check
+        :return: Boolean value
+            True if the first diagonal is full
+            False if not
+        """
+        i = 0
+        n = self.length - 1
+        # Checking the second diagonal /
+        while i < self.length:
+            if self.spaces[i][n].content != player:
+                return False
+            i += 1
+            n -= 1
         return True
 
     def user_input(self, row, column):
@@ -174,9 +204,6 @@ class Board:
             if self.spaces[row][column].content == '*':
                 self.spaces[row][column].computer_occupies()
                 break
-
-        if self.check_entire_board():
-            self.reset_board()
 
     def check_entire_board(self):
         """ Method to check if the entire field is occupied
