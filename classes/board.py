@@ -34,8 +34,16 @@ class Board:
         """
         print("Board of the game. ", self.length, "*", self.length, "\n")
         i = 0
+        print(end="  ")
+        while i < self.length:
+            print(" ", i, end=" ")
+            i += 1
+
+        i = 0
+        print("")
         while i < self.length:
             n = 0
+            print(i, end=" ")
             while n < self.length:
                 # Printing every space
                 print(" ", self.spaces[i][n].content, end=" ")
@@ -56,7 +64,7 @@ class Board:
             n = 0
             while n < self.length:
                 # We found the computer char
-                if self.spaces[i][n] == '0':
+                if self.spaces[i][n].content == '0':
                     if self.check_vertical(n, '0') or self.check_horizontal(i, '0') or self.check_diagonal('0'):
                         return True
                 n += 1
@@ -76,8 +84,8 @@ class Board:
             n = 0
             while n < self.length:
                 # We found the user char
-                if self.spaces[i][n] == 'X':
-                    if self.check_vertical(n, '0') or self.check_horizontal(i, '0') or self.check_diagonal('0'):
+                if self.spaces[i][n].content == 'X':
+                    if self.check_vertical(n, 'X') or self.check_horizontal(i, 'X') or self.check_diagonal('X'):
                         return True
                 n += 1
             i += 1
@@ -126,7 +134,7 @@ class Board:
         i = 0
         n = 0
         while i < self.length:
-            if self.spaces[i][n] != player:
+            if self.spaces[i][n].content != player:
                 return False
             i += 1
             n += 1
@@ -166,6 +174,9 @@ class Board:
             if self.spaces[row][column].content == '*':
                 self.spaces[row][column].computer_occupies()
                 break
+
+        if self.check_entire_board():
+            self.reset_board()
 
     def check_entire_board(self):
         """ Method to check if the entire field is occupied

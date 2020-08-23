@@ -88,8 +88,16 @@ while True:
     if not game_board.user_input(row, column):
         print("Introduce new values")
         continue
+
+    # Introducing computers random play
     game_board.computer_input()
 
-
-
-
+    # Checking if the user won
+    if game_board.did_user_won():
+        print("CONGRATULATIONS, YOU WON!")
+        game_board.print_board()
+        break
+    elif game_board.did_computer_won():
+        game_board.print_board()
+        print("YOU LOST")
+        break
