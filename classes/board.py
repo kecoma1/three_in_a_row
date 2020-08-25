@@ -11,6 +11,9 @@ Date: 23/08/2020
     but the cost for checking the entire field before calling the these methods
     is O(n²).
     Changed the style of the documentation
+
+Date: 25/08/2020
+    Minor change in method print_board
 """
 from classes import space
 import random
@@ -32,7 +35,7 @@ class Board:
 
         :return: void
         """
-        print("Board of the game. ", self.length, "*", self.length, "\n")
+        print("\nBoard of the game. ", self.length, "*", self.length, "\n")
         i = 0
         print(end="  ")
         while i < self.length:
